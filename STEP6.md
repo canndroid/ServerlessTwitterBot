@@ -141,6 +141,8 @@ Before you commit this file and, basically, make your action live, you will need
 
 The next part can be read as a sentence 'on push branches master'. This is when your action will trigger.
 
+**NOTE** GitHub is now defaulting the default branch name as 'main' so you may need to set this accordingly or the workflow will not be triggered as it will be set against a branch that does not exist. If your default branch name for you repository is 'main', replace the line 'master' with 'main'.
+
 `FUNC_APP_NAME:` you need to set this to be your Function App Name. This is the same as we used in the Service Principal. The URL safe version of the name of the Function App we created.
 
 The jobs section is all related to what we want the workflow to do. It's very human readable and means what it says.
@@ -149,7 +151,7 @@ The jobs section is all related to what we want the workflow to do. It's very hu
 
 'steps' are the tasks the workflow will carry out.
 
-- Check out master branch
+- Check out master branch (or main branch see **NOTE** above)
 - Log in to Azure. Notice here how `creds` is set to `${{ secrets.AZURE_CREDENTIALS_WIN }}`. This is how, in an Actions YAML file you refer to the secret created earlier. If you changed the secret name, you will need to update that here.
 - Set Node version. Remember how we chose Node 10.x when we set up the Function App originally? Well, this version must match!
 - NPM Install and build. This contains a set of commands for the Node Package Manager (NPM) to make sure all of our dependencies are used. In our simple case we don't have any dependencies ... so that is OK then.
